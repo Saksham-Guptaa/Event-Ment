@@ -6,8 +6,10 @@ import SmallCard from '../components/SmallCard'
 import LargeCard from '../components/LargeCard'
 import MediumCard from '../components/MediumCard'
 import Footer from '../components/Footer'
+import { AppProps } from 'next/app';
 
-export default function Home({exploreData , cardsData}) {
+
+export default function Home(props:any) {
   return ( 
     <div className="">
       <Head>
@@ -22,7 +24,7 @@ export default function Home({exploreData , cardsData}) {
 
           {/* Pull some data from a server */}
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-            {exploreData?.map((item) => (
+            {props.exploreData?.map((item:any) => (
               <SmallCard
                 key={item.img}
                 img={item.img} distance={item.distance} location={item.location} />
@@ -33,7 +35,7 @@ export default function Home({exploreData , cardsData}) {
         <section>
           <h2 className='text-4xl font-semibold py-8'>Celebreate Anywhere</h2>
           <div className='flex space-x-2 overflow-scroll scrollbar-hide p-3 -ml-3'>
-            {cardsData?.map((item2) =>(
+            {props.cardsData?.map((item2:any) =>(
               <MediumCard
                 key={item2.img2} 
                 img2={item2.img2} 
@@ -56,12 +58,12 @@ export default function Home({exploreData , cardsData}) {
 }
 
 export async function getStaticProps() {
-  const exploreData = await fetch("https://saksham-guptaa.github.io/hackbpitAPI/db.json").
+  const exploreData:any = await fetch("https://saksham-guptaa.github.io/hackbpitAPI/db.json").
   then(
     (res) => res.json()
   );
 
-  const cardsData = await fetch("https://saksham-guptaa.github.io/hackbpitAPI/db2.json").
+  const cardsData:any = await fetch("https://saksham-guptaa.github.io/hackbpitAPI/db2.json").
   then(
     (res) => res.json()
   );
